@@ -22,6 +22,8 @@ class PostController extends AbstractController
     }
 
     /**
+     * @Route("/posts", name="posts_list")
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index()
@@ -31,11 +33,11 @@ class PostController extends AbstractController
                     ->getRepository(Post::class)
                     ->findAll();
 
-        return $this->render('layouts/base.html.twig', ['posts' => $posts]);
+        return $this->render('post/index.html.twig', ['posts' => $posts]);
     }
 
     /**
-     * @Route("/post/show/{id}" name="post_show")
+     * @Route("/post/show/{id}", name="post_show")
      *
      * @param Post $post
      *
@@ -48,7 +50,7 @@ class PostController extends AbstractController
 
 
     /**
-     * @Route("/post/create" name="post_create")
+     * @Route("/post/create", name="post_create")
      *
      * @param Request $request
      *
