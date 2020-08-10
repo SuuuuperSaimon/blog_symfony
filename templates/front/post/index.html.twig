@@ -1,0 +1,14 @@
+{% block body %}
+    <div>
+        <ul>
+            <li>
+                <a href="{{ path('post_create') }}">Create new post</a>
+            </li>
+            {% if posts|length > 0 %}
+                <li>
+                    <a href="{{ path('posts_list') }}">Show All Posts</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endblock %}
