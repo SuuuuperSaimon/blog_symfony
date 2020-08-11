@@ -32,6 +32,12 @@ class RegistrationFormType extends AbstractType
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
+                'first_options' => [
+                    'label' => 'Password'
+                ],
+                'second_options' => [
+                    'label' => 'Repeat Password'
+                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',

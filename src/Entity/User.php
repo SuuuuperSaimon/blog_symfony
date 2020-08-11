@@ -51,7 +51,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $role;
+    private $roles = [];
 
     /**
      * @ORM\Column(type="datetime")
@@ -143,14 +143,25 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getRole(): ?string
+    public function getRoles(): array
     {
-        return $this->role;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
 
-    public function setRole(string $role): self
+    public function setRoles(array $roles): self
     {
-        $this->role = $role;
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function addRole($role)
+    {
+        $this->roles[] = $role;
 
         return $this;
     }
@@ -208,13 +219,6 @@ class User implements UserInterface
         }
 
         return $this;
-    }
-
-    public function getRoles()
-    {
-        return [
-            'ROLE_USER'
-        ];
     }
 
     public function getSalt()

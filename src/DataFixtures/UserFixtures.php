@@ -21,11 +21,11 @@ class UserFixtures extends Fixture
         $user = new User();
         $user->setEmail('admin@philosofy.com');
         $user->setPassword($this->encoder->encodePassword($user, 'password'));
-        $user->setCreatedAt(new \DateTime());
-        $user->setUpdatedAt(new \DateTime());
         $user->setFirstname('admin');
         $user->setLastname('admin');
-        $user->setRole('ROLE_ADMIN');
+        $user->setRoles('ROLE_ADMIN');
+        $user->setUpdatedAt();
+        $user->setCreatedAt();
         $user->setUsername('admin');
 
         $manager->persist($user);

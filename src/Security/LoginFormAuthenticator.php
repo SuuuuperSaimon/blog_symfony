@@ -28,7 +28,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $entityManager;
     private $urlGenerator;
     private $csrfTokenManager;
-    private $passwordEncoder;
 
     public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager)
     {
@@ -68,7 +67,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
 
         if (!$user) {
-            // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
 
@@ -79,8 +77,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         // Check the user's password or other credentials and return true or false
 //        // If there are no credentials to check, you can just return true
-////        throw new \Exception('TODO: check the credentials inside '.__FILE__);
-//        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+//        throw new \Exception('TODO: check the credentials inside '.__FILE__);
         return true;
     }
 
