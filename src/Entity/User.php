@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -28,26 +29,52 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 100,
+     *     minMessage = "Your first name must be at least {{ limit }} characters long",
+     *     maxMessage = "Your first name cannot be longer than {{ limit }} characters",
+     *     allowEmptyString = false)
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 100,
+     *     minMessage = "Your last name must be at least {{ limit }} characters long",
+     *     maxMessage = "Your last name cannot be longer than {{ limit }} characters",
+     *     allowEmptyString = false)
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 100,
+     *     minMessage = "Your username must be at least {{ limit }} characters long",
+     *     maxMessage = "Your username cannot be longer than {{ limit }} characters",
+     *     allowEmptyString = false)
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank()
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *     min = 6,
+     *     max = 100,
+     *     minMessage = "Your password must be at least {{ limit }} characters long",
+     *     maxMessage = "Your password cannot be longer than {{ limit }} characters",
+     *     allowEmptyString = false)
      */
     private $password;
 
@@ -56,15 +83,6 @@ class User implements UserInterface
      */
     private $roles = [];
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="user")
@@ -165,30 +183,6 @@ class User implements UserInterface
     public function addRole($role)
     {
         $this->roles[] = $role;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(): self
-    {
-        $this->createdAt = new \DateTime();
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(): self
-    {
-        $this->updatedAt = new \DateTime();
 
         return $this;
     }
