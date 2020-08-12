@@ -1,42 +1,31 @@
-{% extends ':front/layouts:base_auth.html.twig' %}
+{% extends 'front/layouts/base_auth.html.twig' %}
 
 {% block content %}
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <h4>Register</h4>
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
-    <h4>Register to Administration</h4>
-    <form>
         <div class="form-group">
-            <label>User Name</label>
-            <input type="email" class="form-control" placeholder="User Name">
+            {{ form_row(registrationForm.username, {'attr': {'class': 'form-control'}}) }}
         </div>
         <div class="form-group">
-            <label>Email address</label>
-            <input type="email" class="form-control" placeholder="Email">
+            {{ form_row(registrationForm.firstname, {'attr': {'class': 'form-control'}}) }}
         </div>
         <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" placeholder="Password">
+            {{ form_row(registrationForm.lastname, {'attr': {'class': 'form-control'}}) }}
         </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox"> Agree the terms and policy
-            </label>
+        <div class="form-group">
+            {{ form_row(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
         </div>
-        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Register</button>
+    {% for passwordField in registrationForm.plainPassword  %}
+        <div class="form-group">
+            {{ form_row(passwordField, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    {% endfor %}
+        <button type="submit" class="btn" id="reg_btn">Register</button>
         <div class="social-login-content">
             <div class="social-button">
                 <button type="button" class="btn btn-primary bg-facebook btn-flat btn-addon m-b-10"><i class="ti-facebook"></i>Register with facebook</button>
@@ -44,7 +33,7 @@
             </div>
         </div>
         <div class="register-link m-t-15 text-center">
-            <p>Already have account ? <a href="#"> Sign in</a></p>
+            <p>Already have account ? <a href="{{ path('app_login') }}"> Sign in</a></p>
         </div>
-    </form>
+    {{ form_end(registrationForm) }}
 {% endblock %}
