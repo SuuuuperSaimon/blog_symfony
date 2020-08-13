@@ -12,20 +12,14 @@
     <!-- mobile specific metas
     ================================================== -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
-    {% endblock %}
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
+    <link rel="stylesheet" href="{{ asset('build/css/base.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/vendor.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/main.css') }}">
 
-        <!-- Renders app.js & a webpack runtime.js file
-            <script src="/build/runtime.js"></script>
-            <script src="/build/app.js"></script> -->
-    {% endblock %}
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <script src="{{ asset('js/modernizr.js') }}"></script>
-    <script src="{{ asset('js/pace.min.js') }}"></script>
+    <link rel="shortcut icon" href="{{ asset('build/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('build/images/favicon.ico') }}" type="image/x-icon">
+    <script src="{{ asset('build/js/modernizr.js') }}"></script>
+    <script src="{{ asset('build/js/pace.min.js') }}"></script>
 </head>
 
 <body id="top">
@@ -37,8 +31,8 @@
     {% include 'front/components/footer.html.twig' %}
 
 </body>
-<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-<script src="{{ asset('js/plugins.js') }}"></script>
-<script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('build/js/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ asset('build/js/plugins.js') }}"></script>
+<script src="{{ asset('build/js/main.js') }}"></script>
 
 </html>
